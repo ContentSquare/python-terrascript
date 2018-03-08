@@ -21,7 +21,12 @@ DEBUG = False
 
 import logging 
 import os
-from collections import defaultdict, UserDict
+import sys
+if sys.version_info[0] < 3:
+    from UserDict import UserDict
+    from collections import defaultdict
+else:
+    from collections import defaultdict, UserDict
 
 logger = logging.getLogger(__name__)
 
@@ -170,14 +175,19 @@ class _data(_base):
     """Base class for data sources."""
     _class = 'data'
 
-    # TODO: Work-around for https://github.com/mjuenema/python-terrascript/issues/3
+
+# TODO: Work-around for https://github.com/mjuenema/python-terrascript/issues/3
+class _data_fix_issue(_base):
+    """Base class for data sources."""
+    _class = 'data'
+
     def __init__(self, name, **kwargs):
         if kwargs:
             if not 'type' in kwargs:
                 kwargs['type'] = 'string'
             if not 'description' in kwargs:
                 kwargs['description'] = ''
-        super(_data, self).__init__(name, **kwargs)
+        super(_data_fix_issue, self).__init__(name, **kwargs)
 
 
 class resource(_base):

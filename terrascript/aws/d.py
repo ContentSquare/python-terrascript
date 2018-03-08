@@ -1,4 +1,4 @@
-from terrascript import _data
+from terrascript import _data, _data_fix_issue
 class aws_acm_certificate(_data): pass
 acm_certificate = aws_acm_certificate
 
@@ -92,7 +92,7 @@ iam_account_alias = aws_iam_account_alias
 class aws_iam_group(_data): pass
 iam_group = aws_iam_group
 
-class aws_iam_instance_profile(_data): pass
+class aws_iam_instance_profile(_data_fix_issue): pass
 iam_instance_profile = aws_iam_instance_profile
 
 class aws_iam_policy_document(_data): pass
